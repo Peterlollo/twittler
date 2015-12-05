@@ -43,6 +43,7 @@ var generateRandomTweet = function(){
   tweet.user = randomElement(users);
   tweet.message = randomMessage();
   tweet.created_at = new Date();
+  tweet.timeDelay = timeSince(tweet.created_at);
   addTweet(tweet);
 };
 
@@ -67,3 +68,27 @@ var writeTweet = function(message){
   tweet.message = message;
   addTweet(tweet);
 };
+
+/*================================
+Time Stamp
+==================================*/
+
+function timeSince(timeStamp) {
+    var now = new Date(),
+      secondsPast = (now.getTime() - timeStamp.getTime()) / 1000;
+    if(secondsPast < 60){
+      return parseInt(secondsPast) + 's';
+    }
+    if(secondsPast < 3600){
+      return parseInt(secondsPast/60) + 'm';
+    }
+    if(secondsPast <= 86400){
+      return parseInt(secondsPast/3600) + 'h';
+    }
+    if(secondsPast > 86400){
+        day = timeStamp.getDate();
+        month = timeStamp.toDateString().match(/ [a-zA-Z]*/)[0].replace(" ","");
+        year = timeStamp.getFullYear() == now.getFullYear() ? "" :  " "+timeStamp.getFullYear();
+        return day + " " + month + year;
+    }
+  }
