@@ -2,7 +2,12 @@
  * NOTE: This file generates fake tweet data, and is not intended to be part of your implementation.
  * You can safely leave this file untouched, and confine your changes to index.html.
  */
-
+window.otherUser = {}
+otherUser.mracus = "assets/images/sandor.png";
+otherUser.shawndrost = "assets/images/jon.png";
+otherUser.sharksforcheap = "assets/images/tormund.png";
+otherUser.douglascalhoun = "assets/images/ygritte.png";
+otherUser.primary = "assets/images/bronnSmall.png";
 // set up data structures
 window.streams = {};
 streams.home = [];
