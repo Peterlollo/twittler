@@ -104,7 +104,7 @@ Grid
 .grid {
   margin: 0 auto;
   width: 960px;
-  height: 1000px;
+  height: 100%;
 }
 
 
@@ -139,6 +139,8 @@ Columns
 	width: 33%;
 	text-align: left;
   height: 100%;
+  border: solid 2px #EAEAEA;
+  border-radius: 1em;
 }
 
 /*==================================
@@ -147,13 +149,42 @@ Header
 header {
   display: inline-block;
   background-color: #FFFFFF;
-  width: 960px;
+  width: 100%;
   padding: 0;
   margin: 5px;
-  border: solid 2px #EAEAEA;
-  border-radius: 2em;
+  border-bottom: solid 2px #EAEAEA;
   text-align: center;
+}
 
+/*==================================
+Footer
+====================================*/
+small {
+  float: left;
+  font-weight: 400;
+}
+footer {
+  display: inline-block;
+  width: 100%;
+  margin: 10px;
+  border: solid 2px #EAEAEA;
+  position: relative;
+  text-align: center;
+}
+
+/*==================================
+Links
+====================================*/
+
+a {
+  text-align: center;
+  font: 400 12px/22px "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #bdbebf;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #a9b2b9;
 }
 /*==================================
 Images
@@ -161,7 +192,8 @@ Images
 
 .photo {
   border-radius: 50%;
-}
+  margin: 0 15%;
+  }
 
 
 /*==================================
@@ -189,6 +221,11 @@ button {
   padding: 10px 30px;
   background-color: rgba(47, 194, 239, .5);
   float: left;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #a9b2b9;
 }
 
 .alt {
@@ -200,6 +237,16 @@ button {
 
 .back {
   width: 30%;
-  margin: 0 auto;
+  margin: 2px 5px;
+  border-radius: 5px;
 }
 
+/*==================================
+Text
+====================================*/
+
+p {
+  text-align: center;
+    font: 700 25px/22px "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+}
