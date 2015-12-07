@@ -16,6 +16,8 @@
       <nav>
         <a href="index.html"><img src="favicon.ico">Home</a>
       </nav>
+      <nav><button class ="back">Back to Your Page</button>
+      </nav>
     </header>
 
 
@@ -23,18 +25,19 @@
     <section class="grid">
 
 
-      <!--Tweets: Right Column-->
+      <!--Personal Info: Left Column-->
       <section class="col-1-3">
-        <p>My Info</p>
+        <p>Primary User!</p>
+       <img src="assets/images/bronnSmall.png" class="photo">
       </section>
 
 
-      <!--Personal Info: Left Column-->
+      <!--Tweets: Right Column-->
       <section class="col-2-3">
-        <p>Tweets</p>
-        <ul>
-          <li>Tweet#1</li>
-        </ul>
+         <button class="showTweets">Show New Tweets</button>
+        <div class="tweets">
+          </div>
+       
       </section>
 
 
@@ -51,7 +54,9 @@
     </footer>
 
 
+    <section id="#otherUser">
 
+    </section>
 
 
 
@@ -59,17 +64,90 @@
     <script>
 
       $(document).ready(function(){
+        
+        var preserveBody = $('body').html();
         var $body = $('body');
         /*$body.html('');*/
-
+        var startIndex = streams.home.length-1;
         var index = streams.home.length - 1;
+        var user = streams.home[index].user;
         while(index >= 0){
           var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message + '. Time: ' + tweet.created_at);
-          $tweet.appendTo($('.col-2-3'));
+          var userLink = $('<button class="otherUser"></button>');
+          userLink.text(tweet.user);
+          var $tweet = $('<div class="newTweet"></div>');
+          $tweet.text(tweet.message + '. Time: ' + tweet.created_at);
+          $tweet.append(userLink);
+          $('.tweets').prepend($tweet);
           index -= 1;
         }
+           
+
+        $('.showTweets').on('click', function() {
+          var myIndex = startIndex;
+          startIndex = streams.home.length-1;
+          var index = streams.home.length-1;
+          var user = streams.home[index].user;
+          while(index >= myIndex){
+            var tweet = streams.home[index];
+            var $tweet = $('<li class="newTweet"></li>');
+            var userLink = $('<button class="otherUser"></button>');
+            userLink.text(tweet.user);
+            $tweet.text(tweet.message + '. Time: ' + tweet.created_at);
+            $tweet.append(userLink);
+            $tweet.prependTo($('.tweets')); 
+            index -= 1;
+        }
+        })
+             
+
+
+
+       /*============================================
+        Other User Info
+       ============================================*/
+        
+       
+       $(document).on('click', '.otherUser', function() {
+        
+        $('p').text($(this).text());
+        var user = $(this).text();
+        var userStr = '';
+        userStr += user;
+        $('.photo').attr('src', otherUser[userStr]);
+        var otherCapture = $('.tweets').has(userStr);
+        $('.col-2-3').html('<div class ="otherTweets"></div>');
+        var otherMaxMsgs = streams.users[user].length;
+        var i;
+        for(i=0; i<otherMaxMsgs; i++) {
+          var $tweet = $('<div class="newTweet"></div>')
+          var msg = streams.users[user][i].message
+          $tweet.text(msg)
+          $('.otherTweets').append($tweet);
+          
+        }
+
+
+       })
+
+
+       $('.back').on('click', function() {
+        $('body').html(preserveBody);
+       })
+
+
+
+
+
+
+
+
+
+
+       
+
+
+
 
       });
 
