@@ -9,14 +9,13 @@
     <link rel="stylesheet" href="assets/main.css">
   </head>
   <body>
+    <section class="all">
 
 
     <!--Header-->
     <header>
-      <nav>
+      <nav class="head">
         <a href="index.html"><img src="favicon.ico">Home</a>
-      </nav>
-      <nav><button class ="back">Back to Your Page</button>
       </nav>
     </header>
 
@@ -34,7 +33,9 @@
 
       <!--Tweets: Right Column-->
       <section class="col-2-3">
-         <button class="showTweets">Show New Tweets</button>
+        <div>
+          <button class="showTweets alt">Show New Tweets</button>
+         </div>
         <div class="tweets">
           </div>
        
@@ -57,6 +58,7 @@
     <section id="#otherUser">
 
     </section>
+  </section>
 
 
 
@@ -64,8 +66,7 @@
     <script>
 
       $(document).ready(function(){
-        
-        var preserveBody = $('body').html();
+        var preserveBody = $('.all').html();
         var $body = $('body');
         /*$body.html('');*/
         var startIndex = streams.home.length-1;
@@ -76,14 +77,16 @@
           var userLink = $('<button class="otherUser"></button>');
           userLink.text(tweet.user);
           var $tweet = $('<div class="newTweet"></div>');
-          $tweet.text(tweet.message + '. Time: ' + tweet.created_at);
-          $tweet.append(userLink);
+          $tweet.text(': ' + tweet.message + '. Time: ' + tweet.created_at);
+          $tweet.prepend(userLink);
           $('.tweets').prepend($tweet);
           index -= 1;
         }
-           
+      /*============================================
+        Show Tweets Click Event
+       ============================================*/
 
-        $('.showTweets').on('click', function() {
+        $(document).on('click', '.showTweets', function() {
           var myIndex = startIndex;
           startIndex = streams.home.length-1;
           var index = streams.home.length-1;
@@ -93,23 +96,25 @@
             var $tweet = $('<li class="newTweet"></li>');
             var userLink = $('<button class="otherUser"></button>');
             userLink.text(tweet.user);
-            $tweet.text(tweet.message + '. Time: ' + tweet.created_at);
-            $tweet.append(userLink);
-            $tweet.prependTo($('.tweets')); 
+            $tweet.text(': ' + tweet.message + '. Time: ' + tweet.created_at);
+            $tweet.prepend(userLink);
+            $tweet.prependTo($('.tweets'));
+            preserveBody = $('.all').html(); 
             index -= 1;
         }
         })
              
 
-
+        preserveBody = $('.all').html();
 
        /*============================================
-        Other User Info
+        Other User Click Event
        ============================================*/
-        
        
        $(document).on('click', '.otherUser', function() {
-        
+        preserveBody = $('.all').html();
+        var backButton = $('<button class="back">Back to Your Page</button>');
+        $('.head').append(backButton);
         $('p').text($(this).text());
         var user = $(this).text();
         var userStr = '';
@@ -130,12 +135,9 @@
 
        })
 
-
-       $('.back').on('click', function() {
-        $('body').html(preserveBody);
+       $(document).on('click', '.back', function() {
+        $('.all').html(preserveBody);
        })
-
-
 
 
 
