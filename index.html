@@ -15,7 +15,7 @@
     <!--Header-->
     <header>
       <nav class="head">
-        <a href="index.html"><img src="favicon.ico">Home</a>
+        <a href="index.html" class="home"><img src="favicon.ico">Home</a>
       </nav>
     </header>
 
@@ -26,7 +26,7 @@
 
       <!--Personal Info: Left Column-->
       <section class="col-1-3">
-        <p>Primary User!</p>
+        <p>Me</p>
        <img src="assets/images/bronnSmall.png" class="photo">
       </section>
 
@@ -49,7 +49,7 @@
     <footer>
       <small>&copy;Twittler</small>
 
-      <nav>
+      <nav class="footer">
         <a href="index.html"><img src="favicon.ico">Home</a>
       </nav>
     </footer>
@@ -77,7 +77,7 @@
           var userLink = $('<button class="otherUser"></button>');
           userLink.text(tweet.user);
           var $tweet = $('<div class="newTweet"></div>');
-          $tweet.text(': ' + tweet.message + '. Time: ' + tweet.created_at);
+          $tweet.text(tweet.message + '. Time: ' + tweet.created_at);
           $tweet.prepend(userLink);
           $('.tweets').prepend($tweet);
           index -= 1;
@@ -96,7 +96,7 @@
             var $tweet = $('<li class="newTweet"></li>');
             var userLink = $('<button class="otherUser"></button>');
             userLink.text(tweet.user);
-            $tweet.text(': ' + tweet.message + '. Time: ' + tweet.created_at);
+            $tweet.text(tweet.message + '. Time: ' + tweet.created_at);
             $tweet.prepend(userLink);
             $tweet.prependTo($('.tweets'));
             preserveBody = $('.all').html(); 
