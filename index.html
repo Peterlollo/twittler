@@ -33,6 +33,12 @@
 
       <!--Tweets: Right Column-->
       <section class="col-2-3">
+        <!--Make New Tweets-->
+        <div class= "makeTweet">
+          <input class="makeTweet button newText" type="text" name="inputBox" placeholder="What's happening?">
+          <button class="submit alt">Tweet!</button>
+          
+        </div>
         <div>
           <button class="showTweets alt">Show New Tweets</button>
          </div>
@@ -82,6 +88,20 @@
           $('.tweets').prepend($tweet);
           index -= 1;
         }
+
+    /*============================================
+        Generate New Tweets
+       ============================================*/
+        $(document).on('click', '.submit', function() {
+        var text = $('input').val();
+        var tweetText = $('<div class="newTweet">' + text + ". Time: " + tweet.created_at + '</div>');
+        var userLink = $('<button class="otherUser"></button>');
+        userLink.text('Me');
+        tweetText.prepend(userLink);
+        $('.tweets').prepend(tweetText);
+        $('input').val('');
+       })
+
       /*============================================
         Show Tweets Click Event
        ============================================*/
@@ -93,7 +113,7 @@
           var user = streams.home[index].user;
           while(index >= myIndex){
             var tweet = streams.home[index];
-            var $tweet = $('<li class="newTweet"></li>');
+            var $tweet = $('<div class="newTweet"></div>');
             var userLink = $('<button class="otherUser"></button>');
             userLink.text(tweet.user);
             $tweet.text(tweet.message + '. Time: ' + tweet.created_at);
