@@ -176,7 +176,7 @@ footer {
 Links
 ====================================*/
 
-a {
+a, .livestamp {
   text-align: center;
   font: 400 12px/22px "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #bdbebf;

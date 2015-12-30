@@ -6,6 +6,8 @@
     <link rel="shortcut icon" href="favicon.ico">
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <script src="moment.js"></script>
+    <script src="livestamp.js"></script>
     <link rel="stylesheet" href="assets/main.css">
   </head>
   <body>
@@ -71,6 +73,7 @@
 
     <script>
 
+
       $(document).ready(function(){
         var preserveBody = $('.all').html();
         var $body = $('body');
@@ -82,25 +85,33 @@
           var tweet = streams.home[index];
           var userLink = $('<button class="otherUser"></button>');
           userLink.text(tweet.user);
+          var time = $('<span class="livestamp" data-livestamp="' + tweet.created_at + '"></span>');
           var $tweet = $('<div class="newTweet"></div>');
-          $tweet.text(tweet.message + '. Time: ' + tweet.created_at);
+          $tweet.text(tweet.message);
+          $tweet.append($('<p></p>'), time);
           $tweet.prepend(userLink);
           $('.tweets').prepend($tweet);
           index -= 1;
         }
+ 
 
+    
     /*============================================
         Generate New Tweets
        ============================================*/
         $(document).on('click', '.submit', function() {
         var text = $('input').val();
-        var tweetText = $('<div class="newTweet">' + text + ". Time: " + tweet.created_at + '</div>');
+        var ex = (timeSince(tweet.created_at)).toString();
+        var time = $('<span class="livestamp" data-livestamp="' + new Date() + '"></span>');
+        var tweetText = $('<div class="newTweet">' + text + "      " + '</div>');
         var userLink = $('<button class="otherUser"></button>');
         userLink.text('Me');
+        tweetText.append($('<p></p>'),time);
         tweetText.prepend(userLink);
         $('.tweets').prepend(tweetText);
         $('input').val('');
        })
+
 
       /*============================================
         Show Tweets Click Event
@@ -115,8 +126,10 @@
             var tweet = streams.home[index];
             var $tweet = $('<div class="newTweet"></div>');
             var userLink = $('<button class="otherUser"></button>');
+            var time = $('<span class="livestamp" data-livestamp="' + tweet.created_at + '"></span>');
             userLink.text(tweet.user);
-            $tweet.text(tweet.message + '. Time: ' + tweet.created_at);
+            $tweet.text(tweet.message);
+            $tweet.append($('<p></p>'), time);
             $tweet.prepend(userLink);
             $tweet.prependTo($('.tweets'));
             preserveBody = $('.all').html(); 
